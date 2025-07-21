@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: my-daemonset
+  namespace: default
+  labels:
+    app: my-daemon
+spec:
+  selector:
+    matchLabels:
+      name: my-daemon-pod
+  template:
+    metadata:
+      labels:
+        name: my-daemon-pod
+    spec:
+      containers:
+      - name: my-daemon-container
+        image: busybox
+        command: ["/bin/sh", "-c", "while true; do echo Hello from the DaemonSet; sleep 10; done"]
